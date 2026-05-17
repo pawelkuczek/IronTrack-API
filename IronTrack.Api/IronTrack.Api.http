@@ -1,6 +1,39 @@
 @IronTrack.Api_HostAddress = http://localhost:5248
+@exerciseSlotId = 1
 
-GET {{IronTrack.Api_HostAddress}}/weatherforecast/
+GET {{IronTrack.Api_HostAddress}}/exerciseslots/
+Accept: application/json
+
+###
+
+GET {{IronTrack.Api_HostAddress}}/exerciseslots/{{exerciseSlotId}}
+Accept: application/json
+
+###
+
+POST {{IronTrack.Api_HostAddress}}/exerciseslots/
+Accept: application/json
+Content-Type:application/json
+
+{
+  "AthleteName" : "John Doe",
+  "ExerciseName" : "Squat",
+  "TargetRpe" : 8
+}
+
+###
+
+PUT {{IronTrack.Api_HostAddress}}/exerciseslots/{{exerciseSlotId}}
+Accept: application/json
+Content-Type:application/json
+
+{
+  "TargetRpe" : 6
+}
+
+###
+
+DELETE {{IronTrack.Api_HostAddress}}/exerciseslots/{{exerciseSlotId}}
 Accept: application/json
 
 ###

@@ -18,7 +18,8 @@ Content-Type:application/json
 {
   "AthleteName" : "John Doe",
   "ExerciseName" : "Squat",
-  "TargetRpe" : 8
+  "TargetRpe" : 8,
+  "date": "2026-06-02"
 }
 
 ###

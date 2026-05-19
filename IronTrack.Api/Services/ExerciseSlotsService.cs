@@ -1,11 +1,8 @@
 ﻿using IronTrack.Api.Models;
-using Microsoft.AspNetCore.Mvc;
 
-namespace IronTrack.Api.Controllers
+namespace IronTrack.Api.Services
 {
-    [ApiController]
-    [Route("exerciseslots")]
-    public class ExerciseSlotsController : ControllerBase
+    public class ExerciseSlotsService : IExerciseSlotsService
     {
         private static readonly List<ExerciseSlot> _exerciseSlots = new();
         private static readonly List<string> _allowedExercises = new()
@@ -15,31 +12,29 @@ namespace IronTrack.Api.Controllers
 
         private static int _id = 1;
 
-        [HttpGet]
-        public ActionResult<IEnumerable<ExerciseSlot>> Get() => Ok(_exerciseSlots);
-
-        [HttpGet("{id:int}")]
-        public ActionResult<ExerciseSlot> Get(int id)
+        public ExerciseSlot Get(int id)
         {
             var exerciseSlot = _exerciseSlots.SingleOrDefault(x => x.Id == id);
-            if (exerciseSlot is null)
-            {
-
-                return NotFound();
-            }
             return exerciseSlot;
         }
 
-        [HttpPost]
-        public ActionResult Post([FromBody] ExerciseSlot exerciseSlot)
+        public IEnumerable<ExerciseSlot> GetAll()
+        {
+            return _exerciseSlots;
+
+        }
+        public int? Create(ExerciseSlot exerciseSlot)
         {
             if (!_allowedExercises.Contains(exerciseSlot.ExerciseName))
             {
-
-                return BadRequest();
+                return default;
             }
 
-            exerciseSlot.Date = DateTime.UtcNow.AddDays(1);
+            if (exerciseSlot.Date < DateTime.UtcNow.AddDays(1).Date || exerciseSlot.Date > DateTime.UtcNow.AddDays(14).Date)
+            {
+                return default;
+            }
+
             var exerciseAlreadyAssigned = _exerciseSlots.Any(x =>
             x.AthleteName == exerciseSlot.AthleteName &&
             x.ExerciseName == exerciseSlot.ExerciseName &&
@@ -47,42 +42,40 @@ namespace IronTrack.Api.Controllers
 
             if (exerciseAlreadyAssigned)
             {
-                return BadRequest();
+                return default;
             }
             exerciseSlot.Id = _id;
 
             _id++;
             _exerciseSlots.Add(exerciseSlot);
-            return CreatedAtAction(nameof(Get), new { id = exerciseSlot.Id }, null);
+            return exerciseSlot.Id;
         }
 
-        [HttpPut("{id:int}")]
-        public ActionResult Put(int id, ExerciseSlot exerciseSlot)
+        public bool Update(int id, ExerciseSlot exerciseSlot)
         {
             var existingExerciseSlot = _exerciseSlots.SingleOrDefault(x => x.Id == id);
             if (existingExerciseSlot is null)
             {
 
-                return NotFound();
+                return false;
             }
             existingExerciseSlot.TargetRpe = exerciseSlot.TargetRpe;
 
-            return NoContent();
+            return true;
         }
 
-        [HttpDelete("{id:int}")]
-        public ActionResult Delete(int id)
+        public bool Delete(int id)
         {
             var existingExerciseSlot = _exerciseSlots.SingleOrDefault(x => x.Id == id);
             if (existingExerciseSlot is null)
             {
 
-                return NotFound();
+                return false;
             }
 
             _exerciseSlots.Remove(existingExerciseSlot);
 
-            return NoContent();
+            return true;
         }
     }
 }

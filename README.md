@@ -1,60 +1,34 @@
-\# 🏋️‍♂️ IronTrack API
+# IronTrack API
 
+<p align="center">
+  <img src="assets/logo.png" alt="IronTrack API Logo" width="200"/>
+</p>
 
+A backend system designed for powerlifting training management (Squat, Bench Press, Deadlift). The application allows athletes and coaches to precisely plan training sessions, track performance progression, and estimate baseline metrics.
 
-Backendowy system do zarządzania treningami w trójboju siłowym (Powerlifting - Squat, Bench Press, Deadlift). Aplikacja pozwala zawodnikom i trenerom na precyzyjne planowanie jednostek treningowych, śledzenie postępów oraz estymację wyników.
+## Tech Stack
+- **.NET 10** / **C# 14**
+- ASP.NET Core Web API
+- Swagger / OpenAPI (API Documentation)
+- *Planned:* Entity Framework Core, SQL (PostgreSQL/SQL Server), MediatR, xUnit.
 
+## Current Features
+* **Exercise Slots Management:** Core CRUD capabilities for scheduling lifts.
+* **Strict Domain Validation:** Restricting inputs strictly to official powerlifting disciplines (Squat, Bench Press, Deadlift) and preventing duplicate entries of the same exercise for a single athlete within the same day.
+* **Time Restrictions:** Validation layer ensuring training sessions can only be scheduled from 1 day up to a maximum of 14 days in advance.
+* **REST API Fundamentals:** Proper HTTP status code handling (200, 201, 204, 400, 404) and foundational separation of concerns (Controller -> Service) powered by Dependency Injection. The project is actively evolving towards its target enterprise architecture.
 
+---
 
-\## 🚀 Technologie (Stack)
+## Architectural Approach (Showcase Project)
 
-\- \*\*.NET 10\*\* / \*\*C# 14\*\*
+**Architecture Evolution**
+From a business standpoint, IronTrack API currently handles requirements that could be implemented using a simpler, flat CRUD architecture. However, this project serves as a technical showcase. It is being developed iteratively to adopt Enterprise-grade patterns. Due to the target complexity of the powerlifting domain (e.g., 1RM estimations, DOTS formula calculations, advanced periodization), the application is intentionally designed to evolve towards enterprise-class solutions. In the upcoming stages, the application will adopt **Clean Architecture, CQRS, and Domain-Driven Design (DDD)** to demonstrate proficiency in handling growing business complexity and building scalable software within the .NET ecosystem.
 
-\- ASP.NET Core Web API
+---
 
-\- Swagger / OpenAPI (Dokumentacja API)
+## Local Setup
 
-\- \*W planach:\* Entity Framework Core, SQL (PostgreSQL/SQL Server), MediatR, xUnit.
-
-
-
-\## ⚙️ Obecne funkcjonalności
-
-\* \*\*Zarządzanie oknami treningowymi (Exercise Slots):\*\* Pełna obsługa operacji CRUD dla planowanych bojów.
-
-\* \*\*Ścisła walidacja reguł biznesowych:\*\* Obsługa wyłącznie oficjalnych bojów trójbojowych (Squat, Bench Press, Deadlift) oraz zapobieganie duplikowaniu tego samego ćwiczenia przez tego samego zawodnika w obrębie jednego dnia.
-
-\* \*\*Restrykcje czasowe:\*\* Walidacja planowania jednostek treningowych z wyprzedzeniem od 1 dnia do maksymalnie 14 dni w przód.
-
-\* \*\*Podstawy REST API:\*\* Implementacja bazowych kodów statusu HTTP (200, 201, 204, 400, 404) oraz wstępna separacja logiki (Controller -> Service) oparta na Dependency Injection. Projekt jest w fazie aktywnej ewolucji w kierunku docelowej, zaawansowanej architektury.
-
-
-
-\---
-
-
-
-\## 🏗️ Podejście Architektoniczne (Showcase Project)
-
-
-
-> \\\*\\\*⚠️ Ewolucja Architektury\\\*\\\*
-
-> IronTrack API to projekt rozwijany iteracyjnie. Obecnie znajduje się w fazie wczesnego MVP, opierając się na klasycznych założeniach API (kontrolery, serwisy, DI). Jednakże ze względu na docelową złożoność domeny trójboju siłowego (np. estymacje 1RM, wyliczanie wskaźników DOTS, zaawansowana periodyzacja), aplikacja celowo ewoluuje w stronę rozwiązań klasy Enterprise. W kolejnych etapach projekt będzie wdrażał m.in. \\\*\\\*Clean Architecture, CQRS oraz Domain-Driven Design (DDD)\\\*\\\*, demonstrując moje kompetencje w projektowaniu systemów gotowych na rosnącą złożoność biznesową.
-
-
-
-\---
-
-
-
-\## 🛠️ Jak uruchomić projekt lokalnie
-
-
-
-1\. Sklonuj repozytorium:
-
-&#x20;  ```bash
-
-&#x20;  git clone \[https://github.com/pawelkuczek/IronTrack.Api.git](https://github.com/pawelkuczek/IronTrack.Api.git)
-
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/pawelkuczek/IronTrack-API.git
